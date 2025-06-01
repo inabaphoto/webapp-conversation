@@ -78,3 +78,39 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## デバッグログの制御
+
+アプリケーションには、開発時に役立つデバッグログ機能が組み込まれています。以下のファイルでデバッグログの制御が可能です：
+
+### 1. APIレスポンスのログ制御 (`service/base.ts`)
+
+```typescript
+// デバッグ用：APIレスポンスのログ出力（開発環境のみ）
+if (process.env.NODE_ENV === 'development' && false) { // デバッグが必要な場合はfalseをtrueに変更
+  console.log('API Response:', JSON.stringify(bufferObj, null, 2))
+}
+
+// ボタン情報のデバッグログ（開発環境のみ）
+if (process.env.NODE_ENV === 'development' && false) { // デバッグが必要な場合はfalseをtrueに変更
+  console.log('DEBUG-API: 抽出されたボタン情報:', { /* ログ内容 */ });
+}
+```
+
+### 2. コンポーネントのログ制御 (`app/components/index.tsx`, `app/components/welcome/index.tsx`)
+
+```typescript
+const logger = (prefix: string, ...args: any[]) => {
+  // デバッグログを有効にするフラグ（必要に応じてtrueに変更）
+  const enableDebugLogs = false;
+  
+  // エラーログは常に表示し、デバッグログはフラグに依存
+  const isErrorLog = prefix.toLowerCase().includes('error');
+  
+  if (process.env.NODE_ENV === 'development' && (isErrorLog || enableDebugLogs)) {
+    console.log(`${prefix}:`, ...args);
+  }
+}
+```
+
+デバッグが必要な場合は、各ファイル内の `false` を `true` に変更するか、`enableDebugLogs` フラグを `true` に設定してください。
