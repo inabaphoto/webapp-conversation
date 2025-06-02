@@ -28,7 +28,8 @@ import { TransferMethod } from '@/types/app'
 import { formatFileSize } from '@/utils/format'
 
 const uploadRemoteFileInfo = () => {
-  console.log('TODO')
+  // TODO: リモートファイル情報のアップロード機能を実装
+  // 現在は未実装
 }
 
 export const useFileSizeLimit = (fileUploadConfig?: FileUploadConfigResponse) => {

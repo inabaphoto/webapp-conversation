@@ -22,6 +22,9 @@ import AppUnavailable from '@/app/components/app-unavailable'
 import { API_KEY, APP_ID, APP_INFO, isShowPrompt, promptTemplate } from '@/config'
 import type { Annotation as AnnotationType } from '@/types/log'
 import { addFileInfos, sortAgentSorts } from '@/utils/tools'
+import { logger } from '@/utils/logger'
+
+// グローバルロガー関数をutils/loggerからインポート済み
 
 export type IMainProps = {
   params: any

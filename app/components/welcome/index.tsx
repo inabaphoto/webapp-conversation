@@ -2,6 +2,7 @@
 import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { logger } from '@/utils/logger'
 import TemplateVarPanel, { PanelTitle, VarOpBtnGroup } from '../value-panel'
 import FileUploaderInAttachmentWrapper from '../base/file-uploader-in-attachment'
 import s from './style.module.css'
@@ -37,7 +38,8 @@ const Welcome: FC<IWelcomeProps> = ({
   savedInputs,
   onInputsChange,
 }) => {
-  console.log(promptConfig)
+  // プロンプト設定のデバッグログ
+  logger.debug('PromptConfig', promptConfig)
   const { t } = useTranslation()
   const hasVar = promptConfig.prompt_variables.length > 0
   const [isFold, setIsFold] = useState<boolean>(true)
